@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :types
+
+      root to: "types#index"
+    end
   namespace :manage do
     get 'type/new'
   end
