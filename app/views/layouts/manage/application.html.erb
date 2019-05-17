@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>namespace - admin</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag 'manage/application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'manage/application', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+<% content_for :content do %>
+  <%= render 'layouts/manage/header' %>
+  <%= yield %>
+  <%= render 'layouts/manage/footer' %>
+<% end %>
+<%= render template: "layouts/application" %>
+</body>
+</html>
