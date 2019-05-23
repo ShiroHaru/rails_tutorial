@@ -1,2 +1,0 @@
-module ItemAdmin::TestItemAdminHelper
-end
