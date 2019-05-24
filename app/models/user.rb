@@ -28,5 +28,6 @@ class User < ApplicationRecord
   has_secure_password
 
   #has_secure_passwordによって自動的に追加された属性passwordのバリデーション
-  validates :password, presence: true, length: {minimum: 6}
+  #validates :password, presence: true, length: {minimum: 6}
+  validates :password, length: {minimum: 6}
 end
