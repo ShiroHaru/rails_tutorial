@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :manage do
+    #root
+    root 'static_pages#home'
+
     #users
     get '/signup', to: 'users#new'
     post '/signup', to: 'users#create'

@@ -1,12 +1,33 @@
-<header class="navbar navbar-dark bg-dark mb-5">
-  <div class="container">
-    <%= link_to "sample app", '#', id: "logo" %>
-    <nav>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Home",   '#' %></li>
-        <li><%= link_to "Help",   '#' %></li>
-        <li><%= link_to "Log in", '#' %></li>
-      </ul>
-    </nav>
+<header class="navbar navbar-expand-xl navbar-dark bg-dark mb-5">
+  <%= link_to "sample app", manage_root_path, id: "logo", class: "navbar-brand" %>
+
+  <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navber" aria-controls="navber" aria-expanded="false" aria-label="ナビゲーションの切替">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navber">
+    <ul class="navbar-nav ml-auto">
+      <li><%= link_to "home", manage_root_path, class: 'nav-link' %></li>
+      <li><%= link_to "help", '#', class: 'nav-link' %></li>
+
+      <% if logged_in? %>
+        <li><%= link_to "users", '#', class: 'nav-link' %></li>
+        <div class="btn-group">
+          <li class="dropdown">
+            <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownmenubutton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              account
+            </button>
+            <!-- ドロップメニューの設定 -->
+            <div class="dropdown-menu" aria-labelledby="dropdownmenubutton">
+              <%= link_to "profile", [:manage, current_user], class: 'dropdown-item' %>
+              <%= link_to "settings", '#', class: 'dropdown-item' %>
+              <div class="dropdown-divider"></div>
+              <%= link_to "log out", manage_logout_path, class: 'dropdown-item', method: :delete %>
+            </div><!-- /.dropdown-menu -->
+        </div>
+      <% else %>
+        <li><%= link_to "log in", manage_login_path, class: 'nav-link' %></li>
+      <% end %>
+    </ul>
   </div>
 </header>

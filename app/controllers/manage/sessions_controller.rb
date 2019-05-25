@@ -15,6 +15,7 @@ class Manage::SessionsController < Manage::ApplicationController
   end
 
   def destroy
-
+    log_out
+    redirect_to manage_root_url
   end
 end
