@@ -14,6 +14,7 @@ class UserDashboard < Administrate::BaseDashboard
     password_digest: Field::String,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
+    remember_digest: Field::String,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -37,6 +38,7 @@ class UserDashboard < Administrate::BaseDashboard
     :password_digest,
     :created_at,
     :updated_at,
+    :remember_digest,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -46,6 +48,7 @@ class UserDashboard < Administrate::BaseDashboard
     :name,
     :email,
     :password_digest,
+    :remember_digest,
   ].freeze
 
   # Overwrite this method to customize how users are displayed
