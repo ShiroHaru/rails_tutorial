@@ -9,16 +9,15 @@ class Manage::SessionsController < Manage::ApplicationController
 
       #ログイン情報を記憶するかしないか
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
+      redirect_back_or [:manage, user]
 
-      remember user
-      redirect_to [:manage, user]
     else
       #エラーメッセージを作成
       flash.now[:danger] = 'Invalid email/password combination'
       render 'new'
     end
   end
-
+  
   def destroy
     logger.debug('logged_in?')
     logger.debug(logged_in?)

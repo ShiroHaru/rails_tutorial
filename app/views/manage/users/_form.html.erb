@@ -1,0 +1,17 @@
+<%= form_for([:manage, @user]) do |f| %>
+  <%= render 'shared/error_messages', object: @user %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control mb-3' %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email, class: 'form-control mb-3' %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password, class: 'form-control mb-3' %>
+
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation, class: 'form-control mb-3' %>
+
+  <%= f.submit yield(:button_text), class: "btn btn-primary orm-control mb-3" %>
+<% end %>

@@ -19,8 +19,8 @@
             </button>
             <!-- ドロップメニューの設定 -->
             <div class="dropdown-menu" aria-labelledby="dropdownmenubutton">
-              <%= link_to "profile", [:manage, current_user], class: 'dropdown-item' %>
-              <%= link_to "settings", '#', class: 'dropdown-item' %>
+              <%= link_to "Profile", [:manage, current_user], class: 'dropdown-item' %>
+              <%= link_to "Settings", edit_manage_user_path(current_user), class: 'dropdown-item' %>
               <div class="dropdown-divider"></div>
               <%= link_to "log out", manage_logout_path, class: 'dropdown-item', method: :delete %>
             </div><!-- /.dropdown-menu -->
