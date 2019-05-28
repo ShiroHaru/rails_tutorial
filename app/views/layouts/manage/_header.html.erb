@@ -11,7 +11,7 @@
       <li><%= link_to "help", '#', class: 'nav-link' %></li>
 
       <% if logged_in? %>
-        <li><%= link_to "users", '#', class: 'nav-link' %></li>
+        <li><%= link_to "users", manage_users_path, class: 'nav-link' %></li>
         <div class="btn-group">
           <li class="dropdown">
             <button type="button" class="btn btn-secondary dropdown-toggle" id="dropdownmenubutton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

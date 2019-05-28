@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+git_source(:github) {|repo| "https://github.com/#{repo}.git"}
 
 ruby '2.6.1'
 
@@ -35,13 +35,15 @@ gem 'bcrypt', '~> 3.1.12'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
-
 gem 'kaminari'
+gem 'will_paginate', '~> 3.0'
+gem 'will_paginate-bootstrap4', '~> 0.2.2'
 gem 'rails-i18n'
 gem 'administrate'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem 'mini_racer'
+gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

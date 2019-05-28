@@ -3,7 +3,7 @@ class Manage::UsersController < Manage::ApplicationController
   before_action :check_current_user, only: [:edit, :update]
 
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page])
   end
 
   def show
