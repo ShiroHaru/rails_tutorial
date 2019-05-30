@@ -18,6 +18,9 @@ Rails.application.routes.draw do
 
     # account_activations
     resources :account_activations, only: [:edit]
+
+    # password_reset
+    resources :password_resets, only: [:new, :create, :edit, :update]
   end
 
   namespace :admin do
