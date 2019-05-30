@@ -34,4 +34,15 @@ ActiveRecord::Schema.define(version: 2019_05_30_080418) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  create_table "users_1", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "id"
+    t.text "name", limit: 255
+    t.text "email", limit: 255
+    t.text "password_digest", limit: 255
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.text "remember_digest", limit: 255
+    t.integer "admin", limit: 1
+  end
+
 end

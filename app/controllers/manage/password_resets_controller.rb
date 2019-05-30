@@ -1,7 +1,9 @@
 class Manage::PasswordResetsController < Manage::ApplicationController
+  # emailを入力してパスワードリセットメールを送るフォーム
   def new
   end
 
+  # 入力されたemailからパスワードリセットメールを送る
   def create
     @user = User.find_by(email: params[:password_reset][:email].downcase)
     if @user
@@ -15,6 +17,8 @@ class Manage::PasswordResetsController < Manage::ApplicationController
     end
   end
 
+  # パスワードリセットメールのリンク先、新しいパスワードの入力フォーム
   def edit
+
   end
 end
