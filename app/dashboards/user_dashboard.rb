@@ -15,6 +15,12 @@ class UserDashboard < Administrate::BaseDashboard
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
     remember_digest: Field::String,
+    admin: Field::Boolean,
+    activation_digest: Field::String,
+    activated: Field::Boolean,
+    activated_at: Field::DateTime,
+    reset_digest: Field::String,
+    reset_sent_at: Field::DateTime,
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -39,6 +45,12 @@ class UserDashboard < Administrate::BaseDashboard
     :created_at,
     :updated_at,
     :remember_digest,
+    :admin,
+    :activation_digest,
+    :activated,
+    :activated_at,
+    :reset_digest,
+    :reset_sent_at,
   ].freeze
 
   # FORM_ATTRIBUTES
@@ -49,6 +61,12 @@ class UserDashboard < Administrate::BaseDashboard
     :email,
     :password_digest,
     :remember_digest,
+    :admin,
+    :activation_digest,
+    :activated,
+    :activated_at,
+    :reset_digest,
+    :reset_sent_at,
   ].freeze
 
   # Overwrite this method to customize how users are displayed

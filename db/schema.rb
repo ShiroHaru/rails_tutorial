@@ -10,13 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_30_080418) do
-
-  create_table "types", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 2019_05_31_065400) do
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name"
@@ -32,17 +26,6 @@ ActiveRecord::Schema.define(version: 2019_05_30_080418) do
     t.string "reset_digest"
     t.datetime "reset_sent_at"
     t.index ["email"], name: "index_users_on_email", unique: true
-  end
-
-  create_table "users_1", id: false, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.bigint "id"
-    t.text "name", limit: 255
-    t.text "email", limit: 255
-    t.text "password_digest", limit: 255
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.text "remember_digest", limit: 255
-    t.integer "admin", limit: 1
   end
 
 end
