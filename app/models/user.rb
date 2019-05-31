@@ -39,8 +39,10 @@ class User < ApplicationRecord
   #has_secure_passwordメソッドの呼び出し
   has_secure_password
 
-  #has_secure_passwordによって自動的に追加された属性passwordのバリデーション
-  #validates :password, presence: true, length: {minimum: 6}
+  # has_secure_passwordによって自動的に追加された属性passwordのバリデーション
+  # allow_nil: true は空の場合はバリデーションをしないが
+  # has_secure_passwordではオブジェクト生成時のみ存在性を検証するようになっているので
+  # 空のパスワード (nil) が新規ユーザー登録時に有効になることはない
   validates :password, presence: true, length: {minimum: 6}, allow_nil: true
 
 
@@ -87,8 +89,7 @@ class User < ApplicationRecord
   # パスワードの再設定の属性を設定する
   def create_reset_digest
     self.reset_token = User.new_token
-    update_attribute(:reset_digest,  User.digest(reset_token))
-    update_attribute(:reset_sent_at, Time.zone.now)
+    update_columns(reset_digest:  User.digest(reset_token), reset_sent_at: Time.zone.now)
   end
 
   # パスワードの再設定のメールを送信する
@@ -96,7 +97,13 @@ class User < ApplicationRecord
     Manage::UserMailer.password_reset(self).deliver_now
   end
 
+  # パスワード再設定の期限が切れている場合はtrueを返す
+  def password_reset_expired?
+    reset_sent_at < 2.hours.ago
+  end
+
   private
+
 
   # before_save
 
