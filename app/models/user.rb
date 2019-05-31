@@ -78,7 +78,7 @@ class User < ApplicationRecord
 
   # アカウントを有効にする
   def activate
-    update_columns(:activated, true, :activated_at, Time.zone.now)
+    update_columns(activated: true, activated_at: Time.zone.now)
   end
 
   # 有効化用のメールを送信する
