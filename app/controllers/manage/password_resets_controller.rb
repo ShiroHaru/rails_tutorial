@@ -13,17 +13,18 @@ class Manage::PasswordResetsController < Manage::ApplicationController
     if @user
       @user.create_reset_digest
       @user.send_password_reset_email
-      flash[:info] = "Email sent with password reset instructions"
+      #flash[:info] = "Email sent with password reset instructions"
+      flash[:info] = "パスワードリセットのメールを送りました"
       redirect_to manage_root_url
     else
-      flash.now[:danger] = "Email address not found"
+      #flash.now[:danger] = "Email address not found"
+      flash.now[:danger] = "メールアドレスが見つかりません"
       render 'new'
     end
   end
 
   # パスワードリセットメールのリンク先、新しいパスワードの入力フォーム
   def edit
-
   end
 
   def update
@@ -43,7 +44,8 @@ class Manage::PasswordResetsController < Manage::ApplicationController
       #再設定が成功したのでdbのreset_digestをnilにする
       @user.update_attribute(:reset_digest, nil)
 
-      flash[:success] = "Password has been reset."
+      #flash[:success] = "Password has been reset."
+      flash[:success] = "パスワードがリセットされました."
       redirect_to [:manage, @user]
     else
       # 無効なパスワードだった場合
@@ -65,7 +67,10 @@ class Manage::PasswordResetsController < Manage::ApplicationController
 
   # 正しいユーザーかどうか確認する
     def valid_user
-      unless (@user && @user.activated? && @user.authenticated?(:reset, params[:id]))
+      # ACTIVATED(アクティベーション)が完了していなくてもパスワードの変更ができるようにするために
+      # unless の条件から @user.activated? を外す
+      unless (@user && @user.authenticated?(:reset, params[:id]))
+        #flash[:danger] = "アクティベーションが完了していません"
         redirect_to manage_root_url
       end
     end
@@ -73,7 +78,8 @@ class Manage::PasswordResetsController < Manage::ApplicationController
   # 期限切れかどうかを確認する
     def check_expiration
       if @user.password_reset_expired? # 有効期限が切れている場合
-        flash[:danger] = "Password reset has expired."
+        #flash[:danger] = "Password reset has expired."
+        flash[:danger] = "パスワードリセットの有効期限が切れています"
         redirect_to new_manage_password_reset_url
       end
     end
