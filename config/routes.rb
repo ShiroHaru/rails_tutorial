@@ -21,6 +21,9 @@ Rails.application.routes.draw do
 
     # password_reset
     resources :password_resets, only: [:new, :create, :edit, :update]
+
+    #microposts
+    resources :microposts, only: [:create, :destroy]
   end
 
   namespace :admin do
