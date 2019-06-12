@@ -1,0 +1,8 @@
+<div class="d-flex mb-3">
+  <%= link_to gravatar_for(current_user, size: 50), [:manage, current_user] %>
+  <h3><%= current_user.name %></h3>
+</div>
+<div class="mb-3">
+  <span><%= link_to "view my profile", [:manage, current_user] %></span>
+  <span><%= pluralize(current_user.microposts.count, "micropost") %></span>
+</div>

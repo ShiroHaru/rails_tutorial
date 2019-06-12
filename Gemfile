@@ -27,23 +27,30 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.12'
 
-# Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
 
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+# Use ActiveStorage variant
+gem 'mini_magick', '~> 4.8'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+gem 'carrierwave', '1.2.2'
 gem 'kaminari'
 gem 'will_paginate', '~> 3.0'
 gem 'will_paginate-bootstrap4', '~> 0.2.2'
+
 gem 'rails-i18n'
 gem 'administrate'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails'
 gem 'mini_racer'
 gem 'faker'
+
+group :production do
+  gem 'fog', '1.42'
+end
+
+# Use Capistrano for deployment
+# gem 'capistrano-rails', group: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
