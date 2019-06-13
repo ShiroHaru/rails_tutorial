@@ -22,7 +22,19 @@
 #
 
 class User < ApplicationRecord
+  #micropost
   has_many :microposts, dependent: :destroy
+
+  # ユーザーフォロー関連
+
+  # 能動的関係(active_relationships)
+  has_many :active_relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
+  has_many :following, through: :active_relationships, source: :followed
+
+  # 受動的関係(passive_relationships)
+  has_many :passive_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :followers, through: :passive_relationships, source: :follower
+
 
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save :downcase_email
@@ -91,7 +103,7 @@ class User < ApplicationRecord
   # パスワードの再設定の属性を設定する
   def create_reset_digest
     self.reset_token = User.new_token
-    update_columns(reset_digest:  User.digest(reset_token), reset_sent_at: Time.zone.now)
+    update_columns(reset_digest: User.digest(reset_token), reset_sent_at: Time.zone.now)
   end
 
   # パスワードの再設定のメールを送信する
@@ -108,6 +120,23 @@ class User < ApplicationRecord
   # 完全な実装は次章の「ユーザーをフォローする」を参照
   def feed
     Micropost.where("user_id = ?", id)
+  end
+
+  # ユーザーフォロー関連
+
+  # ユーザーをフォローする
+  def follow(other_user)
+    following << other_user
+  end
+
+  # ユーザーをフォロー解除する
+  def unfollow(other_user)
+    active_relationships.find_by(followed_id: other_user.id).destroy
+  end
+
+  # 現在のユーザーがフォローしてたらtrueを返す
+  def following?(other_user)
+    following.include?(other_user)
   end
 
   private
