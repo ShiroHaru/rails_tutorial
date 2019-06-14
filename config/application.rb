@@ -19,5 +19,10 @@ module App
     config.i18n.default_locale = :ja
     config.time_zone = 'Tokyo'
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml').to_s]
+
+    # 認証トークンをremoteフォームに埋め込む
+    # リスト 14.37: JavaScriptが無効になっていたときのための設定
+    config.action_view.embed_authenticity_token_in_remote_forms = true
+
   end
 end

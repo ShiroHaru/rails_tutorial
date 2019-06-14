@@ -1,5 +1,5 @@
 class Manage::UsersController < Manage::ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:index, :edit, :update, :destroy, :following, :followers]
   before_action :check_current_user, only: [:edit, :update]
   before_action :admin_user, only: [:destroy]
 
@@ -54,18 +54,35 @@ class Manage::UsersController < Manage::ApplicationController
     redirect_to manage_users_url
   end
 
+  # フォローしているユーザーを表示
+  def following
+    @title = "Following"
+    @user = User.find(params[:id])
+    @users = @user.following.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
+  # フォローされているユーザーを表示
+  def followers
+    @title = "Followers"
+    @user = User.find(params[:id])
+    @users = @user.followers.paginate(page: params[:page])
+    render 'show_follow'
+  end
+
   private
+
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
-    #正しいユーザーかどうか確認
+  #正しいユーザーかどうか確認
     def check_current_user
       @user = User.find(params[:id])
       redirect_to(manage_root_url) unless current_user?(@user)
     end
 
-    #管理者かどうか
+  #管理者かどうか
     def admin_user
       redirect_to(admin_root_url) unless current_user.admin?
     end

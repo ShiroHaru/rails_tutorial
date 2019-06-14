@@ -8,9 +8,6 @@ Rails.application.routes.draw do
     post '/signup', to: 'users#create'
     resources :users
 
-    # types
-    get 'types/new'
-
     # sessions
     get '/login', to: 'sessions#new'
     post '/login', to: 'sessions#create'
@@ -34,6 +31,10 @@ Rails.application.routes.draw do
         get :following, :followers
       end
     end
+
+    #relationships
+    resources :relationships, only: [:create, :destroy]
+
   end
 
   namespace :admin do
