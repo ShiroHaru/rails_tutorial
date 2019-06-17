@@ -119,7 +119,15 @@ class User < ApplicationRecord
   # 試作feedの定義
   # 完全な実装は次章の「ユーザーをフォローする」を参照
   def feed
-    Micropost.where("user_id = ?", id)
+    #Micropost.where("user_id = ?", id)
+
+    # 自分のポストとフォローしている人のポストを取得
+    #Micropost.where("user_id IN (?) OR user_id = ?", following_ids, id)
+
+    # リスト 14.47: フィードの最終的な実装
+    following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
+    Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
+
   end
 
   # ユーザーフォロー関連

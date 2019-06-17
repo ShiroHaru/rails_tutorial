@@ -6,7 +6,7 @@ services:
     volumes:
       - .:/app
     ports:
-      - 3000:3000
+      - 4001:3000
     depends_on:
       - db
     tty: true
@@ -16,7 +16,7 @@ services:
     volumes:
       - db-volume:/var/lib/mysql
     ports:
-      - 3306:3306
+      - 4307:3306
     environment:
       MYSQL_ROOT_PASSWORD: password
 volumes:
